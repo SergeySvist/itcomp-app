@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('daily_reports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('report_id');
-            $table->date('publish_at');
             $table->text('description');
+            $table->timestamps();
+            $table->softDeletesDatetime();
 
             $table->foreign('report_id')->references('id')->on('projects_users');
 
