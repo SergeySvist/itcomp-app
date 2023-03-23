@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('relation_types', function (Blueprint $table) {
             $table->id();
             $table->string('title', 64);
-            $table->string('description');
-            $table->dateTime('deadline_date');
             $table->timestamps();
-            $table->softDeletesDatetime();
-
         });
     }
 
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('relation_types');
     }
 };

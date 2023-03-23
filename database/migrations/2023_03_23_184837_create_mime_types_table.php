@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('daily_reports', function (Blueprint $table) {
+        Schema::create('mime_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('report_id');
-            $table->text('description');
+            $table->string('title', 64);
+
             $table->timestamps();
-            $table->softDeletesDatetime();
-
-            $table->foreign('report_id')->references('id')->on('projects_users');
-
         });
     }
 
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daily_reports');
+        Schema::dropIfExists('mime_types');
     }
 };

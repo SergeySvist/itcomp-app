@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('file_types', function (Blueprint $table) {
             $table->id();
-            $table->string('path');
+            $table->string('title', 64);
 
             $table->timestamps();
-            $table->softDeletesDatetime();
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('file_types');
     }
 };
