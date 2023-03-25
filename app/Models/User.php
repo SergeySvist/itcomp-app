@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Users extends Model
+class User extends Model
 {
     use HasFactory;
 
@@ -14,6 +15,10 @@ class Users extends Model
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at', 'deleted_at',
+        'role_id', 'created_at', 'updated_at', 'deleted_at',
     ];
+
+    protected function role(): HasOne{
+        return $this->hasOne(Role::class);
+    }
 }
