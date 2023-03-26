@@ -17,7 +17,9 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->unique()->word(),
+            'description' => $this->faker->text(),
+            'deadline_date' => $this->faker->dateTime(),
         ];
     }
 }
