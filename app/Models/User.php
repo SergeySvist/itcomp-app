@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Model
@@ -18,7 +19,9 @@ class User extends Model
         'role_id', 'created_at', 'updated_at', 'deleted_at',
     ];
 
-    protected function role(): HasOne{
-        return $this->hasOne(Role::class);
+
+    protected function relation(): HasMany{
+        return $this->hasMany(Relation::class);
+
     }
 }

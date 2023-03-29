@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class File extends Model
@@ -19,11 +20,11 @@ class File extends Model
         'created_at', 'updated_at',
     ];
 
-    protected function fileType(): HasOne{
-        return $this->hasOne(FileType::class);
+    protected function mimeType(): BelongsTo{
+        return $this->belongsTo(MimeType::class);
     }
 
-    protected function mimeType(): HasOne{
-        return $this->hasOne(MimeType::class);
+    protected function fileType(): BelongsTo{
+        return $this->belongsTo(FileType::class);
     }
 }

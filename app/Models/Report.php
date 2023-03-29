@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Report extends Model
@@ -20,11 +21,7 @@ class Report extends Model
         'created_at', 'updated_at',
     ];
 
-    protected function reportType(): HasOne{
-        return $this->hasOne(ReportType::class);
-    }
-
-    protected function relation(): HasOne{
-        return $this->hasOne(Relation::class);
+    protected function relation(): BelongsTo{
+        return $this->belongsTo(Relation::class);
     }
 }
