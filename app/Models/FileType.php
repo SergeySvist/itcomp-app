@@ -20,6 +20,5 @@ class FileType extends Model
 
     protected function file(): HasMany{
         return $this->hasMany(File::class);
-
     }
 }

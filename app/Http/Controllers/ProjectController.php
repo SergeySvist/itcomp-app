@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\CreateProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
+use App\Models\File;
+use App\Models\FileType;
 use App\Models\Project;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;

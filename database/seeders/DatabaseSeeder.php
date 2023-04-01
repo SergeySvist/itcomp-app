@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             ProjectSeeder::class,
+            FileTypeSeeder::class,
+            MimeTypeSeeder::class,
+            RelationTypeSeeder::class,
+            ReportTypeSeeder::class,
         ]);
     }
 }
