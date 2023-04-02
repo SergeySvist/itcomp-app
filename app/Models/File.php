@@ -13,10 +13,10 @@ class File extends Model
 
     protected $fillable = [
         'original_name', 'original_extension', 'path',
+        'filetype_id', 'mimetype_id',
     ];
 
     protected $hidden = [
-        'filetype_id', 'mimetype_id',
         'created_at', 'updated_at',
     ];
 

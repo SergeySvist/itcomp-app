@@ -7,6 +7,7 @@ use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Models\File;
 use App\Models\FileType;
 use App\Models\Project;
+use App\Services\Files\FileService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +24,11 @@ class ProjectController extends Controller
         return $this->successResponse($project->toArray());
     }
 
-    public function create(CreateProjectRequest $request){
+    public function create(CreateProjectRequest $request, FileService $fileService){
         $project = Project::create($request->validated());
+        $ts = $fileService->save($request['ts'], 'ts');
 
-        return $this->successResponse(['id'=>$project->id], null, Response::HTTP_CREATED);
+        return $this->successResponse(['id'=>$project->id, $ts], null, Response::HTTP_CREATED);
     }
 
     public function update(Project $project, UpdateProjectRequest $request){
