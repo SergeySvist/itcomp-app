@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RelationType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,20 +14,9 @@ class RelationTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('relation_types')->insert([
-            'title' => 'work',
-        ]);
-
-        DB::table('relation_types')->insert([
-            'title' => 'break',
-        ]);
-
-        DB::table('relation_types')->insert([
-            'title' => 'fired',
-        ]);
-
-        DB::table('relation_types')->insert([
-            'title' => 'vacation',
-        ]);
+        RelationType::create(['title' => 'work']);
+        RelationType::create(['title' => 'break']);
+        RelationType::create(['title' => 'fired']);
+        RelationType::create(['title' => 'vacation']);
     }
 }

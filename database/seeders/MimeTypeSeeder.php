@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MimeType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,16 +14,8 @@ class MimeTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('mime_types')->insert([
-            'title' => 'application/json',
-        ]);
-
-        DB::table('mime_types')->insert([
-            'title' => 'application/pdf',
-        ]);
-
-        DB::table('mime_types')->insert([
-            'title' => 'image/png',
-        ]);
+        MimeType::create(['title' => 'application/json']);
+        MimeType::create(['title' => 'application/pdf']);
+        MimeType::create(['title' => 'image/png']);
     }
 }

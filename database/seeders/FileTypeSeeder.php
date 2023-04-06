@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\FileType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,14 +14,13 @@ class FileTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('file_types')->insert([
-            'title' => 'technical specification',
-            'slug' => 'ts',
-        ]);
+        FileType::create(
+            ['title' => 'technical specification',
+            'slug' => 'ts',]);
 
-        DB::table('file_types')->insert([
-            'title' => 'avatar',
-            'slug' => 'ava',
-        ]);
+        FileType::create(
+            ['title' => 'avatar image',
+                'slug' => 'ava',]);
+
     }
 }

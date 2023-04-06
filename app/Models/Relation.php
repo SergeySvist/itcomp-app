@@ -8,6 +8,30 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * App\Models\Relation
+ *
+ * @property int $id
+ * @property int $project_id
+ * @property int $user_id
+ * @property string $start_date
+ * @property string $end_date
+ * @property int $type_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Relation whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Relation extends Model
 {
     use HasFactory;

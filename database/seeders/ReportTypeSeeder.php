@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ReportType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,20 +14,9 @@ class ReportTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('report_types')->insert([
-            'title' => 'daily',
-        ]);
-
-        DB::table('report_types')->insert([
-            'title' => 'weekly',
-        ]);
-
-        DB::table('report_types')->insert([
-            'title' => 'monthly',
-        ]);
-
-        DB::table('report_types')->insert([
-            'title' => 'project',
-        ]);
+        ReportType::create(['title' => 'daily']);
+        ReportType::create(['title' => 'weekly']);
+        ReportType::create(['title' => 'monthly']);
+        ReportType::create(['title' => 'project']);
     }
 }
