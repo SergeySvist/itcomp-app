@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('surname');
             $table->string('email');
             $table->string('password');
-            $table->unsignedBigInteger('role_id');
+            //$table->unsignedBigInteger('role_id');
             $table->timestamps();
             $table->softDeletesDatetime();
 
-            $table->foreign('role_id')->references('id')->on('roles');
+            //$table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
