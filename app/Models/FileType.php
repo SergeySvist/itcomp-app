@@ -30,7 +30,7 @@ class FileType extends Model
         'title', 'slug',
     ];
 
-    protected function file(): HasMany{
-        return $this->hasMany(File::class);
+    protected function projectFile(): HasMany{
+        return $this->hasMany(ProjectFile::class);
     }
 }

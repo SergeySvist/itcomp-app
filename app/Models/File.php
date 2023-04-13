@@ -37,7 +37,7 @@ class File extends Model
 
     protected $fillable = [
         'original_name', 'original_extension', 'path',
-        'filetype_id', 'mimetype_id',
+        'mimetype_id',
     ];
 
     protected $hidden = [
@@ -48,7 +48,4 @@ class File extends Model
         return $this->belongsTo(MimeType::class);
     }
 
-    protected function fileType(): BelongsTo{
-        return $this->belongsTo(FileType::class);
-    }
 }
