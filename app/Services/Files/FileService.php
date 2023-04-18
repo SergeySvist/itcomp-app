@@ -6,6 +6,7 @@ use App\Exceptions\ApiBadRequestException;
 use App\Exceptions\ApiNotFoundException;
 use App\Models\File;
 use App\Models\MimeType;
+use App\Services\Files\Handlers\ImageHandler;
 use App\Services\Files\Handlers\PdfHandler;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -15,21 +16,16 @@ class FileService
 
     private $handlers = [
         PdfHandler::class,
-
+        ImageHandler::class,
     ];
 
     private ?AbstractFileHandler $fileHandler = null;
 
-    public function save(UploadedFile $uploadedFile, string $fileType){
-        $mimetype = DB::table('mime_types')->where('title', $uploadedFile->getMimeType())->first();
+    public function save(UploadedFile $uploadedFile){
+        $mimetype = DB::table('mime_types')->where('title', $uploadedFile->getClientMimeType())->first();
 
         if (!isset($mimetype))
-            throw new ApiNotFoundException('File mime type is undefined');
-
-        $filetype = DB::table('file_types')->where('slug', $fileType)->first();
-
-        if (!isset($filetype))
-            throw new ApiNotFoundException('File type is undefined');
+            throw new ApiNotFoundException('File mime type is undefined' . $uploadedFile->getMimeType());
 
         $path = $this->getFileHandler($uploadedFile->getClientMimeType())->store($uploadedFile);
 
@@ -37,7 +33,6 @@ class FileService
             'original_name' => $uploadedFile->getClientOriginalName(),
             'original_extension' => $uploadedFile->getClientOriginalExtension(),
             'path' => $path,
-            'filetype_id' => $filetype->id,
             'mimetype_id' => $mimetype->id,
         ]);
 

@@ -20,7 +20,7 @@ class FileTypeSeeder extends Seeder
 
         FileType::create(
             ['title' => 'avatar image',
-                'slug' => 'ava',]);
+                'slug' => 'avatar',]);
 
     }
 }
