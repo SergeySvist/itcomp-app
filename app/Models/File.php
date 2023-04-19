@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * App\Models\File
@@ -34,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class File extends Model
 {
     use HasFactory;
+    const DEFAULT_URL = '';
 
     protected $fillable = [
         'original_name', 'original_extension', 'path',
@@ -48,4 +51,14 @@ class File extends Model
         return $this->belongsTo(MimeType::class);
     }
 
+    public function url(): Attribute{
+        return Attribute::make(
+            get: function (){
+                if(Storage::exists($this->path))
+                    return asset('storage/' . $this->path);
+
+                return self::DEFAULT_URL;
+            }
+        );
+    }
 }

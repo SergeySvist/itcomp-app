@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -38,10 +39,25 @@ class Project extends Model
     ];
 
     protected $hidden = [
+        'project_files',
         'created_at', 'updated_at', 'deleted_at',
+    ];
+
+    protected $appends = [
+        'project_files_data',
     ];
 
     protected function relation(): HasMany{
         return $this->hasMany(Relation::class);
+    }
+
+    protected function projectFiles(): HasMany{
+        return $this->hasMany(ProjectFile::class);
+    }
+
+    public function projectFilesData(): Attribute{
+        return Attribute::make(
+            get: fn() => $this->projectFiles
+        );
     }
 }

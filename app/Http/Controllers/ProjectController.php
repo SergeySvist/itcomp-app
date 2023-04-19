@@ -50,7 +50,7 @@ class ProjectController extends Controller
         $this->createNewProjectFile($project->id, $ts->id, 'ts');
         $this->createNewProjectFile($project->id, $avatar->id, 'avatar');
 
-        return $this->successResponse(['id'=>$project->id, $ts, $avatar], null, Response::HTTP_CREATED);
+        return $this->successResponse($project->toArray(), null, Response::HTTP_CREATED);
     }
 
     public function update(Project $project, UpdateProjectRequest $request){
