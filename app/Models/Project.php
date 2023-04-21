@@ -39,7 +39,7 @@ class Project extends Model
     ];
 
     protected $hidden = [
-        'project_files',
+        'projectFiles',
         'created_at', 'updated_at', 'deleted_at',
     ];
 
@@ -51,7 +51,7 @@ class Project extends Model
         return $this->hasMany(Relation::class);
     }
 
-    protected function projectFiles(): HasMany{
+    public function projectFiles(): HasMany{
         return $this->hasMany(ProjectFile::class);
     }
 

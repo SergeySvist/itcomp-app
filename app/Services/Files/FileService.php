@@ -10,6 +10,7 @@ use App\Services\Files\Handlers\ImageHandler;
 use App\Services\Files\Handlers\PdfHandler;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class FileService
 {
@@ -20,6 +21,16 @@ class FileService
     ];
 
     private ?AbstractFileHandler $fileHandler = null;
+
+    public function getStream(File $file){
+        if( Storage::exists($file->path))
+            return Storage::download($file->path, $file->original_name);
+        return null;
+    }
+
+    public function delete(File $file){
+        return $this->getFileHandler($file->mimeTypeTitle)->delete($file);
+    }
 
     public function save(UploadedFile $uploadedFile){
         $mimetype = DB::table('mime_types')->where('title', $uploadedFile->getClientMimeType())->first();

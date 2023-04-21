@@ -19,7 +19,11 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')
+                ->references('id')->on('projects')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->foreign('filetype_id')->references('id')->on('file_types');
         });
     }

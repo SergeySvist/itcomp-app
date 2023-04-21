@@ -18,7 +18,7 @@ class ProjectFile extends Model
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at', 'file', 'file_type',
+        'created_at', 'updated_at', 'file', 'fileType',
     ];
 
     protected $appends = [
@@ -34,11 +34,11 @@ class ProjectFile extends Model
         return $this->belongsTo(Project::class);
     }
 
-    protected function file(): hasOne{
+    public function file(): hasOne{
         return $this->hasOne(File::class, 'id', 'file_id');
     }
 
-    protected function fileType(): hasOne{
+    public function fileType(): hasOne{
         return $this->hasOne(FileType::class, 'id', 'filetype_id');
     }
 

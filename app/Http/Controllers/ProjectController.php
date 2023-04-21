@@ -34,6 +34,14 @@ class ProjectController extends Controller
         $projectFile->save();
     }
 
+    private function findFileBySlug(Project $project ,string $slug){
+        for ($i=0;$i<count($project->projectFilesData->toArray());$i++){
+            if($project->projectFilesData[$i]->fileType->slug == "avatar")
+                return $project->projectFilesData[$i]->file;
+        }
+    }
+
+
     public function index(){
         return $this->successResponse(Project::all()->toArray());
     }
@@ -53,14 +61,23 @@ class ProjectController extends Controller
         return $this->successResponse($project->toArray(), null, Response::HTTP_CREATED);
     }
 
-    public function update(Project $project, UpdateProjectRequest $request){
+    public function update(Project $project, UpdateProjectRequest $request, FileService $fileService){
         $project->update($request->validated());
-
+//        if (isset($request['avatar'])){
+//
+//            $fileService->delete($this->findFileBySlug($project,'avatar'));
+//
+//            //$file = $fileService->save($request['avatar']);
+//        }
         return $this->successResponse([], null, Response::HTTP_NO_CONTENT);
     }
 
-    public function delete(Project $project){
+    public function delete(Project $project, FileService $fileService){
         //todo: cascade update ???
+        for ($i=0;$i<count($project->projectFilesData->toArray());$i++)
+            $fileService->delete($project->projectFilesData[$i]->file);
+
+
         $project->delete();
 
         return $this->successResponse([], null, Response::HTTP_NO_CONTENT);

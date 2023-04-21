@@ -47,10 +47,13 @@ class File extends Model
         'created_at', 'updated_at',
     ];
 
-    protected function mimeType(): BelongsTo{
+    protected function mimeTypes(): BelongsTo{
         return $this->belongsTo(MimeType::class);
     }
 
+    protected function mimeType(): hasOne{
+        return $this->hasOne(MimeType::class, 'id', 'mimetype_id');
+    }
     public function url(): Attribute{
         return Attribute::make(
             get: function (){
@@ -59,6 +62,12 @@ class File extends Model
 
                 return self::DEFAULT_URL;
             }
+        );
+    }
+
+    public function mimeTypeTitle(): Attribute{
+        return Attribute::make(
+            get: fn() => $this->mimeType->title
         );
     }
 }
