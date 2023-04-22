@@ -34,11 +34,22 @@ class ProjectController extends Controller
         $projectFile->save();
     }
 
+    private function updateProjectFile(Project $project, string $fileTypeSlug, UpdateProjectRequest $request, FileService $fileService){
+        if (isset($request[$fileTypeSlug])){
+
+            $fileService->delete($this->findFileBySlug($project,$fileTypeSlug));
+
+            $file = $fileService->save($request['avatar']);
+            $this->createNewProjectFile($project->id, $file->id, $fileTypeSlug);
+        }
+    }
+
     private function findFileBySlug(Project $project ,string $slug){
         for ($i=0;$i<count($project->projectFilesData->toArray());$i++){
             if($project->projectFilesData[$i]->fileType->slug == "avatar")
                 return $project->projectFilesData[$i]->file;
         }
+        throw new ApiNotFoundException("File not found");
     }
 
 
@@ -63,17 +74,13 @@ class ProjectController extends Controller
 
     public function update(Project $project, UpdateProjectRequest $request, FileService $fileService){
         $project->update($request->validated());
-//        if (isset($request['avatar'])){
-//
-//            $fileService->delete($this->findFileBySlug($project,'avatar'));
-//
-//            //$file = $fileService->save($request['avatar']);
-//        }
+        $this->updateProjectFile($project, 'avatar', $request, $fileService);
+        $this->updateProjectFile($project, 'ts', $request, $fileService);
+
         return $this->successResponse([], null, Response::HTTP_NO_CONTENT);
     }
 
     public function delete(Project $project, FileService $fileService){
-        //todo: cascade update ???
         for ($i=0;$i<count($project->projectFilesData->toArray());$i++)
             $fileService->delete($project->projectFilesData[$i]->file);
 

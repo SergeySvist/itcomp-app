@@ -18,8 +18,8 @@ class UpdateProjectRequest extends ApiRequest
             'title' => 'sometimes|string|max:255',
             'description' => 'sometimes|string|max:255',
             'deadline_date' => 'sometimes|date',
-            'avatar' => 'sometimes|file|mimes:jpeg,jpg,png|max:10240', // 10mb=10240kb
             'ts' => 'sometimes|mimes:pdf|max:51200', // 50mb=51200kb
+            'avatar' => 'sometimes|file|mimes:jpeg,jpg,png|max:10240', // 10mb=10240kb
         ];
     }
 }
