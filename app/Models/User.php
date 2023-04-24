@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\HasPermissionTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,14 +40,14 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasPermissionTrait;
 
     protected $fillable = [
         'name', 'surname', 'email', 'password',
     ];
 
     protected $hidden = [
-        'role_id', 'created_at', 'updated_at', 'deleted_at',
+        'created_at', 'updated_at', 'deleted_at',
     ];
 
 
@@ -53,4 +55,5 @@ class User extends Authenticatable
         return $this->hasMany(Relation::class);
 
     }
+
 }

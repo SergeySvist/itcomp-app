@@ -12,6 +12,7 @@ use App\Models\ProjectFile;
 use App\Services\Files\FileService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -54,7 +55,7 @@ class ProjectController extends Controller
 
 
     public function index(){
-        return $this->successResponse(Project::all()->toArray());
+        return $this->successResponse([Project::all()->toArray()]);
     }
 
     public function get(Project $project){

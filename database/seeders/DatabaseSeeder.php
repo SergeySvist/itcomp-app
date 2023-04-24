@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             MimeTypeSeeder::class,
             RelationTypeSeeder::class,
             ReportTypeSeeder::class,
+            RoleSeeder::class,
+            PermissionSeeder::class,
         ]);
     }
 }
